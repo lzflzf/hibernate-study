@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<hibernate-mapping>
+    <class name="com.lizhifeng.study.hibernate.Customer" table="CUSTOMER">
+        <id name="id" column="CID" type="java.lang.Integer">
+            <generator class="increment" />
+        </id>
+        <property name="userName" column="USERNAME" type="java.lang.String"/>
+        <property name="password" column="PASSWORD" type="java.lang.String"/>
+        
+        <set name ="accounts"
+             inverse = "true"
+             cascade = "all"
+             lazy="false">
+             <key column ="CID"/>
+             <one-to-many class="com.lizhifeng.study.hibernate.Account"/>
+		</set>
+        
+    </class>
+</hibernate-mapping>

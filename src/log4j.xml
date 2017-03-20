@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">  
+  
+<log4j:configuration>  
+  
+ <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">  
+  <layout class="org.apache.log4j.PatternLayout">  
+   <param name="ConversionPattern"  value="%d - %c -%-4r [%t] %-5p %x - %m%n" />  
+  </layout>  
+    
+  <!--限制输出级别-->  
+  <filter class="org.apache.log4j.varia.LevelRangeFilter">  
+   <param name="LevelMax" value="ERROR"/>  
+   <param name="LevelMin" value="TRACE"/>  
+  </filter>  
+ </appender> 
+ 
+ 
+ 
+     <appender name="FILE" class="org.apache.log4j.RollingFileAppender">        
+        <param name="File" value="D:/output22.log" /><!-- 设置日志输出文件名 -->     
+        <!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->     
+        <param name="Append" value="true" />     
+        <param name="MaxBackupIndex" value="10" />     
+        <layout class="org.apache.log4j.PatternLayout">     
+            <param name="ConversionPattern" value="%d - %c -%-4r [%t] %-5p %x - %m%n" />     
+        </layout>     
+    </appender>     
+    
+    
+     <appender name="socketAppender" class="org.apache.log4j.net.SocketAppender"> 
+        <param name="remoteHost" value="192.168.59.17" /> 
+        <param name="port" value="4560" /> 
+        <param name="Threshold" value="ERROR" /> 
+        <param name="ReconnectionDelay" value="1000" /> 
+        <param name="LocationInfo" value="true" /> 
+      </appender>
+
+
+<logger name="log4j.logger.org.hibernate.SQL" additivity="true">
+	<level value="ALL" />
+	<appender-ref ref="FILE" />  
+</logger>
+
+
+ <root>  
+  <level value="INFO" />
+  <appender-ref ref="CONSOLE" />  
+  <appender-ref ref="socketAppender" />
+ </root>  
+ 
+</log4j:configuration>  
